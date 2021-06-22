@@ -50,5 +50,12 @@ Router.put('/:id', (req, res) => {
     })
 })
 
+Router.delete('/:id', async (req,res) => {
+    const results = await Hotel.findByIdAndDelete(req.params.id);
+    if(!results) return res.status(404).send('There is no hotel with that id');
+
+    res.status(200).send("Deleted succesfully");
+})
+
 
 module.exports = Router
