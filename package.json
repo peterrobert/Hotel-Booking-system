@@ -1,0 +1,30 @@
+{
+  "name": "hotel-booking-system",
+  "version": "1.0.0",
+  "description": "This is the API of the booking system created in node js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterrobert/Hotel-Booking-system.git"
+  },
+  "keywords": [
+    "Javascript",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Peter Robert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterrobert/Hotel-Booking-system/issues"
+  },
+  "homepage": "https://github.com/peterrobert/Hotel-Booking-system#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^13.0.0",
+    "mongoose": "^5.12.14"
+  }
+}
