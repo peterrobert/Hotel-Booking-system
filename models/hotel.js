@@ -17,12 +17,12 @@ const hotelSchema = mongoose.Schema({
     price: {
         type: Number,
         minlength: 0,
-        maxlength: 50,
+        maxlength: 100000,
         required: true
     },
     description: {
         type: String,
-        minlength: 50,
+        minlength: 10,
         maxlength: 1000,
         required: true
     }
@@ -35,10 +35,10 @@ const Hotel = mongoose.model('Hotel', hotelSchema)
 
 const hotelValidation = (obj) => {
     const schema = {
-        name: Joi.String().required().min(10).max(200),
-        location: Joi.String().required().min(10).max(200),
-        price: Joi.Number().required().min(0).max(50),
-        description: Joi.String().required().min(50).max(1000)
+        name: Joi.string().required().min(10).max(200),
+        location: Joi.string().required().min(10).max(200),
+        price: Joi.number().required().min(0).max(100000),
+        description: Joi.string().required().min(10).max(1000)
     }
 
     return Joi.validate(obj, schema);
