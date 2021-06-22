@@ -47,4 +47,4 @@ const hotelValidation = (obj) => {
 
 
 exports.Hotel = Hotel;
-exports.hotelValidation = hotelValidation;
+exports.validate = hotelValidation;
