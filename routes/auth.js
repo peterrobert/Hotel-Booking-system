@@ -31,8 +31,6 @@ Router.post('/', (req, res) => {
         })
     }
 
-    console.log(req.body)
-
     validateFunction(req.body).then((data) => {
         loginUser(data)
     }).catch((err) => {
