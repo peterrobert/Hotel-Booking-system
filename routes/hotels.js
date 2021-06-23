@@ -1,5 +1,6 @@
 const express = require('express');
 const Router = express.Router();
+const auth = require('../middleware/authorization')
 
 
 // Custom models =====
@@ -12,7 +13,7 @@ Router.get('/', async (req, res) => {
     res.status(200).send(hotels)
 })
 
-Router.post('/', (req, res) => {
+Router.post('/', auth,  (req, res) => {
     const createHotel = async (obj) => {
         const hotel = new Hotel(obj);
         const results = await hotel.save();
