@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const Joi = require('joi');
+const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
 
 const bookingSchema = mongoose.Schema({
     arrival: {
-        type: Date,
+        type: String,
         required: true,
     },
-    depaturel: {
-        type: Date,
+    departure: {
+        type: String,
         required: true,
     },
     rooms: {
@@ -24,17 +24,20 @@ const bookingSchema = mongoose.Schema({
         required: true
     },
 
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
-    hotelId: {
+    hotel: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: "Hotel"
     }
 
 });
 
+bookingSchema.set('autoIndex', true)
 
 const Booking = mongoose.model('Booking', bookingSchema);
 
@@ -42,12 +45,12 @@ const Booking = mongoose.model('Booking', bookingSchema);
 
 const bookingValidation = (obj) => {
     const schema = {
-        arrival: Joi.date().required(),
-        depature: Joi.date().required(),
+        arrival: Joi.string().required(),
+        departure: Joi.string().required(),
         rooms: Joi.number().required().min(1).max(10),
         guest: Joi.string().required().min(5).max(255),
-        userId: Joi.objectId().required(),
-        hotelId: Joi.objectId().required()
+        user: Joi.objectId().required(),
+        hotel: Joi.objectId().required()
     }
 
    return  Joi.validate(obj, schema)

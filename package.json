@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/peterrobert/Hotel-Booking-system#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "joi": "^13.0.0",
