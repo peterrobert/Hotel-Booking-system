@@ -35,4 +35,20 @@ Router.get('/:hotelID/:id', async (req, res) => {
     res.status(200).send(results);
 })
 
+Router.put('/:hotelID/:id', auth, (req, res) => {
+//   Update ========
+  const updateBooking = (obj) => {
+      const results = Booking.findByIdAndUpdate(req.params.id, obj, {new: true});
+      res.status(200).send(results)
+  }
+
+//   Validate ======
+bookingValidation(req.body).then((results) => {
+     updateBooking(results);
+}).catch((err) => {
+    res.send(err.details[0].message)
+})
+
+})
+
 module.exports = Router
