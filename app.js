@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const hotels = require('./routes/hotels');
 const register = require('./routes/registration');
 const login = require('./routes/auth')
+const booking = require('./routes/booking')
 // Initialize express ====
 const app = express();
 
@@ -15,7 +16,8 @@ const port = process.env.PORT || 3000
 app.use(express.json());
 app.use('/api/hotels', hotels)
 app.use('/api/register', register)
-app.use('/api/login', login)
+app.use('/api/login', login);
+app.use('/api/booking', booking)
 
 // Connect to the database ====
 mongoose.connect('mongodb://localhost/hotelBooking', { useNewUrlParser: true }).then(() => console.log('database connected'))
