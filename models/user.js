@@ -38,3 +38,4 @@ const userValidation = (obj) => {
 
 exports.User = User;
 exports.validate = userValidation;
+exports.userSchema = userSchema;
