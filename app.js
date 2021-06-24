@@ -6,6 +6,7 @@ const hotels = require('./routes/hotels');
 const register = require('./routes/registration');
 const login = require('./routes/auth')
 const booking = require('./routes/booking')
+const review = require('./routes/review')
 // Initialize express ====
 const app = express();
 
@@ -17,7 +18,8 @@ app.use(express.json());
 app.use('/api/hotels', hotels)
 app.use('/api/register', register)
 app.use('/api/login', login);
-app.use('/api/booking', booking)
+app.use('/api/booking', booking);
+app.use('/api/review', review)
 
 // Connect to the database ====
 mongoose.connect('mongodb://localhost/hotelBooking', { useNewUrlParser: true }).then(() => console.log('database connected'))
