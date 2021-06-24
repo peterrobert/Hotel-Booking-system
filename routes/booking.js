@@ -6,7 +6,7 @@ const { Booking, bookingValidation } = require('../models/booking');
 const auth = require('../middleware/authorization')
 
 Router.get('/:hotelID', auth, async (req, res) => {
-    const bookings = await Booking.find({hotel: req.params.hotelID}).populate('hotel', 'name location price')
+    const bookings = await Booking.find({ hotel: req.params.hotelID }).populate('hotel', 'name location price')
     if (bookings.length < 1) return res.status(200).send('There are no bookings at the moment');
     res.status(200).send(bookings)
 })
@@ -31,24 +31,29 @@ Router.post('/:hotelID', auth, (req, res) => {
 
 Router.get('/:hotelID/:id', async (req, res) => {
     const results = await Booking.findById(req.params.id);
-    if(!results) return res.status(404).send("There is no booking with that ID");
+    if (!results) return res.status(404).send("There is no booking with that ID");
     res.status(200).send(results);
 })
 
 Router.put('/:hotelID/:id', auth, (req, res) => {
-//   Update ========
-  const updateBooking = (obj) => {
-      const results = Booking.findByIdAndUpdate(req.params.id, obj, {new: true});
-      res.status(200).send(results)
-  }
+    //   Update ========
+    const updateBooking = (obj) => {
+        const results = Booking.findByIdAndUpdate(req.params.id, obj, { new: true });
+        res.status(200).send(results)
+    }
 
-//   Validate ======
-bookingValidation(req.body).then((results) => {
-     updateBooking(results);
-}).catch((err) => {
-    res.send(err.details[0].message)
+    //   Validate ======
+    bookingValidation(req.body).then((results) => {
+        updateBooking(results);
+    }).catch((err) => {
+        res.send(err.details[0].message)
+    })
+
 })
 
+Router.delete('/:hotelID/:id', auth, async (req,res) => {
+    const results = Booking.findOneAndDelete(req.params.id);
+    res.status(200).send(results);
 })
 
 module.exports = Router
