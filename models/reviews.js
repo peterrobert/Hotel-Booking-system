@@ -3,8 +3,6 @@ const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi)
 
 // ==== Custom models 
-const {hotelSchema} = require('../models/hotel');
-const {userSchema} = require('../models/user');
 
 const reviewShema = mongoose.Schema({
     comment: {
@@ -15,15 +13,18 @@ const reviewShema = mongoose.Schema({
     rating:{
         type: Number,
         required: true,
-        minlength: 1
+        minlength: 1,
+        maxlength: 5
     },
     user: {
-        type: userSchema,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     hotel: {
-        type: hotelSchema,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Hotel'
     }
 
 })
@@ -35,13 +36,12 @@ const reviewValidation = (obj) => {
     const schema = {
         comment: Joi.string().required().min(5),
         rating: Joi.number().required().min(5),
+        user: Joi.objectId().required(),
         hotel: Joi.objectId().required()
     }
 
     return Joi.validate(obj, schema)
 }
-
-
 
 exports.Review = Review;
 exports.validate = reviewValidation

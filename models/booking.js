@@ -37,8 +37,6 @@ const bookingSchema = mongoose.Schema({
 
 });
 
-bookingSchema.set('autoIndex', true)
-
 const Booking = mongoose.model('Booking', bookingSchema);
 
 // Validate user entry ======
